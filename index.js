@@ -345,7 +345,7 @@ module.exports.route = function(router, Model, options){
         // last
         function(req, res, next){
             res.json({
-                message: Model.modelName+' deleted'
+                message: Model.modelName+' '+req.params.id+' deleted'
             });
         }
     ));
