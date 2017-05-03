@@ -1,7 +1,7 @@
 {
   "name": "mongoose-rest",
   "version": "1.0.0",
-  "description": "",
+  "description": "Express REST interface for mongoose models",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/mocha/bin/mocha"
@@ -10,7 +10,15 @@
     "type": "git",
     "url": "git+https://github.com/vpalmisano/mongoose-rest.git"
   },
-  "author": "Vittorio Palmisano",
+  "author": {
+    "email": "vpalmisano@gmail.com",
+    "name": "Vittorio Palmisano"
+  },
+  "keywords": [
+    "rest",
+    "express",
+    "mongoose"
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/vpalmisano/mongoose-rest/issues"
