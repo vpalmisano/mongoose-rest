@@ -6,7 +6,6 @@ const request = require('request');
 const util = require('util');
 const MongooseRest = require('..');
 
-
 //
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -38,7 +37,7 @@ function TestServer(port, schema, options){
 
     var server = http.createServer(app);
     server.listen(port, function(){
-        console.log('Express test server listening');
+        console.log('Express test server listening on port: '+port);
     });
 
     //
@@ -48,7 +47,7 @@ function TestServer(port, schema, options){
 
         delete mongoose.models.TestModel;
         delete mongoose.modelSchemas.TestModel;
-        mongoose.connection.close(done)
+        mongoose.connection.close(done);
     }
 }
 
@@ -78,6 +77,7 @@ function logResponse(res){
 //
 describe('MongooseRest tests', function(){
     const PORT = 12345;
+    const URL = 'http://localhost:'+PORT+'/api/v1/TestModel';
     var server;
 
     before(function(){
@@ -100,7 +100,11 @@ describe('MongooseRest tests', function(){
                 text: {
                     auth_view: true,
                     auth_edit: true,
-                }
+                },
+                value: {
+                    auth_view: true,
+                    auth_edit: false,
+                },
             },
 
             preList: [
@@ -135,7 +139,7 @@ describe('MongooseRest tests', function(){
     
     //
     it('add item', function(){
-        return makeRequest('http://localhost:'+PORT+'/api/v1/TestModel', 'POST', {}, {
+        return makeRequest(URL, 'POST', {}, {
             _id: 0,
             text: 'text1',
             value: true
@@ -143,7 +147,7 @@ describe('MongooseRest tests', function(){
     });
 
     it('add item', function(){
-        return makeRequest('http://localhost:'+PORT+'/api/v1/TestModel', 'POST', {}, {
+        return makeRequest(URL, 'POST', {}, {
             _id: 1,
             text: 'text2',
             value: false
@@ -151,14 +155,24 @@ describe('MongooseRest tests', function(){
     });
 
     it('list items', function(){
-        return makeRequest('http://localhost:'+PORT+'/api/v1/TestModel', 'GET', {}).then(logResponse);
+        return makeRequest(URL, 'GET', {}).then(logResponse);
     });
 
+    it('edit item 1', function(){
+        return makeRequest(URL+'/1', 'PATCH', {}, {
+            text: 'text2 mod',
+            value: true
+        });
+    });
+
+    it('list items', function(){
+        return makeRequest(URL, 'GET', {}).then(logResponse);
+    });
 
     it('delete items', function(){
         return Promise.all([
-            makeRequest('http://localhost:'+PORT+'/api/v1/TestModel/0', 'DELETE').then(logResponse),
-            makeRequest('http://localhost:'+PORT+'/api/v1/TestModel/1', 'DELETE').then(logResponse),
+            makeRequest(URL+'/0', 'DELETE').then(logResponse),
+            makeRequest(URL+'/1', 'DELETE').then(logResponse),
         ]);
     });
 
