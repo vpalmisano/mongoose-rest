@@ -285,7 +285,7 @@ module.exports.route = function(router, Model, options){
         options.preUpdate || [],
         function(req, res, next){
             debug('patch', path, req.query, req.params.id, req.body);
-            //
+            // query matching document
             var q = Model
             .find(req.query.query)
             .findOne({ _id: req.params.id })
@@ -298,10 +298,11 @@ module.exports.route = function(router, Model, options){
         },
         filterBody,
         function(req, res, next){
-            //
+            // update values
             Object.keys(req.body).forEach(function(k){
                 req.erm.document[k] = req.body[k];
             });
+            // save
             return req.erm.document.save()
             .then(function(result){
                 req.erm = {
