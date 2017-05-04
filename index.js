@@ -203,9 +203,7 @@ module.exports.route = function(router, Model, options){
             Promise.all([countQuery, q])
             .then(function(results){               
                 res.set('X-Total-Count', results[0]);
-                req.erm = {
-                    document: results[1],
-                }
+                req.document = results[1];
                 next();
             }, next);
         },
@@ -213,7 +211,7 @@ module.exports.route = function(router, Model, options){
         options.postList || [],
         // last
         function(req, res, next){
-            res.json(req.erm.document);
+            res.json(req.document);
         }
     ));
 
@@ -236,9 +234,7 @@ module.exports.route = function(router, Model, options){
             q = q.lean(true);
             //
             q.then(function(result){
-                req.erm = {
-                    document: result,
-                }
+                req.document = result;
                 next();
             }, next);
         },
@@ -246,7 +242,7 @@ module.exports.route = function(router, Model, options){
         options.postGet || [],
         // last
         function(req, res, next){
-            res.json(req.erm.document);
+            res.json(req.document);
         }
     ));
 
@@ -262,9 +258,7 @@ module.exports.route = function(router, Model, options){
             new Model(req.body)
             .save()
             .then(function(result){
-                req.erm = {
-                    document: result,
-                }
+                req.document = result;
                 next();
             }, next);
         },
@@ -290,9 +284,7 @@ module.exports.route = function(router, Model, options){
             .find(req.query.query)
             .findOne({ _id: req.params.id })
             .then(function(result){
-                req.erm = {
-                    document: result,
-                }
+                req.document = result;
                 next();
             });
         },
@@ -300,14 +292,12 @@ module.exports.route = function(router, Model, options){
         function(req, res, next){
             // update values
             Object.keys(req.body).forEach(function(k){
-                req.erm.document[k] = req.body[k];
+                req.document[k] = req.body[k];
             });
             // save
-            return req.erm.document.save()
+            return req.document.save()
             .then(function(result){
-                req.erm = {
-                    document: result,
-                }
+                req.document = result;
                 next();
             }, next);
         },
@@ -335,9 +325,7 @@ module.exports.route = function(router, Model, options){
                 return result.remove();
             })
             .then(function(result){
-                req.erm = {
-                    document: result,
-                }
+                req.document = result;
                 next();
             }, next)
         },

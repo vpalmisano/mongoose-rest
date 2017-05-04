@@ -7,8 +7,8 @@ node_js:
 services:
   - "mongodb"
 sudo: false
-before_install:
-  - npm i
+#before_install:
+#  - npm i
 script:
   - npm test
 #after_success:
