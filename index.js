@@ -267,7 +267,8 @@ module.exports.route = function(router, Model, options){
         // last
         function(req, res, next){
             res.json({
-                message: Model.modelName+' created'
+                message: Model.modelName+' created',
+                _id: req.document._id.toString(),
             });
         }
     ));
