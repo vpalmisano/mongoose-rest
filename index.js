@@ -250,8 +250,8 @@ module.exports.route = function(router, Model, options){
     router.post(path, [].concat(
         options.preAll || [],
         parseQuery,
-        filterBody,
         options.preCreate || [],
+        filterBody,
         function(req, res, next){
             debug('post', path, req.query, req.params.id, req.body);
             //           
@@ -284,6 +284,9 @@ module.exports.route = function(router, Model, options){
             .find(req.query.query)
             .findOne({ _id: req.params.id })
             .then(function(result){
+                if(!result){
+                    return next(new Error(Model.modelName+' '+req.params.id+' not found'));
+                }
                 req.document = result;
                 next();
             });
