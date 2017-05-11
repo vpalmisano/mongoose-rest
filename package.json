@@ -1,5 +1,5 @@
 {
-  "name": "mongoose-rest",
+  "name": "mongoose-rest-router",
   "version": "1.0.0",
   "description": "Express REST interface for mongoose models",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vpalmisano/mongoose-rest.git"
+    "url": "git+https://github.com/vpalmisano/mongoose-rest-router.git"
   },
   "author": {
     "email": "vpalmisano@gmail.com",
@@ -21,9 +21,9 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/vpalmisano/mongoose-rest/issues"
+    "url": "https://github.com/vpalmisano/mongoose-rest-router/issues"
   },
-  "homepage": "https://github.com/vpalmisano/mongoose-rest#readme",
+  "homepage": "https://github.com/vpalmisano/mongoose-rest-router#readme",
   "dependencies": {
     "debug": "^2.6.6",
     "lodash": "^4.17.4"

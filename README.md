@@ -1,11 +1,11 @@
-# mongoose-rest
+# mongoose-rest-router
 
-[![Build Status](https://travis-ci.org/vpalmisano/mongoose-rest.png)](https://travis-ci.org/vpalmisano/mongoose-rest)
+[![Build Status](https://travis-ci.org/vpalmisano/mongoose-rest-router.png)](https://travis-ci.org/vpalmisano/mongoose-rest-router)
 
 ## Install
 
 ```sh
-npm install --save mongoose-rest
+npm install --save mongoose-rest-router
 ```
 
 ## Usage example
@@ -26,7 +26,7 @@ var TestModel = mongoose.model('TestModel', TestSchema);
 ```
 
 ```javascript
-const MongooseRest = require('mongoose-rest');
+const MongooseRest = require('mongoose-rest-router');
 var app = express();
 
 MongooseRest.route(app, TestModel, {
