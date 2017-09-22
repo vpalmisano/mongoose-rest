@@ -139,9 +139,12 @@ module.exports.route = function(router, Model, options){
         .then(function(select){
             //
             if(Object.keys(req.query.select).length > 0){
-                req.query.select = Object.keys(req.query.select).filter(function(name){
-                    return select[name] === 1;
-                });
+                req.query.select = Object.keys(req.query.select).reduce(function(_, name){
+                    if(select[name] === 1){
+                        _[name] = 1;
+                    };
+                    return _;
+                }, {});
             }
             else{
                 req.query.select = select;
