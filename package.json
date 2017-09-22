@@ -1,6 +1,6 @@
 {
   "name": "mongoose-rest-router",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Express REST interface for mongoose models",
   "main": "index.js",
   "scripts": {
